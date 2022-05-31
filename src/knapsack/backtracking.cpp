@@ -35,13 +35,20 @@ namespace assignment {
 
     // ... если текущая "польза" максимальна, обновляем наилучшую "пользу"
     if (profit > best_profit) {
-      // ...
+      best_profit = profit;
+      best_profit_mask = mask;
     }
 
     // рассматриваем следующий элемент
     index += 1;
 
     // ... рекурсивные вызовы со включением/исключением следующего элемента
+    solve(profits, weights, capacity, index, mask | (1 << index),
+          weight + weights[index], profit, best_profit, best_profit_mask);
+    solve(profits, weights, capacity, index, mask,
+          weight, profit, best_profit, best_profit_mask);
+
+
   }
 
 }  // namespace assignment

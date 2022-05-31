@@ -35,6 +35,10 @@ namespace assignment {
 
       // ... обработка случая превышения емкости рюкзака
 
+      if (curr_weight > capacity) {
+        continue;
+      }
+
       // массив из "пользы" рассматриваемых элементов
       const auto masked_profits = mask2elems(profits, mask);
 
@@ -42,11 +46,17 @@ namespace assignment {
       const int curr_profit = sum_helper(masked_profits);
 
       // ... обработка случая нахождения большего значения "пользы"
+
+      if (curr_profit > best_profit) {
+        best_profit = curr_profit;
+        best_profit_mask = mask;
+      }
+
     }
 
     // ... возвращение итогового результата: используйте mask2indices;
 
-    return {};
+    return mask2indices(weights, best_profit_mask);
   }
 
 }  // namespace assignment

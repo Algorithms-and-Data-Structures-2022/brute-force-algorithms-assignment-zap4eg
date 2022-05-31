@@ -29,6 +29,13 @@ namespace assignment {
     if (index == static_cast<int>(set.size()) - 1) {
 
       // ... сохранение полученного подмножества
+      std::vector<int> cur;
+      for (int i = 0; i < set.size(); i++) {
+        if (is_bit_set(mask, i)) {
+          cur.push_back(i);
+        }
+      }
+      subsets.push_back(cur);
 
       return;  // возвращаемся по дереву рекурсии
     }
@@ -37,6 +44,9 @@ namespace assignment {
 
     // здесь должны быть рекурсивные вызовы ...
     // включаем или не включаем элемент с текущим индексом в подмножество (используя битовую маску)
+    generate(set, index, mask + (1 << index), subsets);
+    generate(set, index, mask, subsets);
+
   }
 
 }  // namespace assignment
